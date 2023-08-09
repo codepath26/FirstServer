@@ -29,4 +29,6 @@ let server = http.createServer((req, res) => {
 
 server.listen(2000, () => {
   console.log('Server is listening on port 2000');
+  console.log('Server is listening on port 2000');
+
 });
