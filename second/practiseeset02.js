@@ -1,5 +1,7 @@
 const express= require('express');
 const bodyParser = require('body-parser');
+const adminRoutes = require('./routes/admin')
+const shopRoutes = require('./routes/shop');
 const app  =  express();
 //this is the simple type
 // app.use((req,res,next)=>{
@@ -13,24 +15,12 @@ const app  =  express();
 
  //parse the data 
  app.use(bodyParser.urlencoded({extended : false}))
-//use middleware with routes 
-app.use('/' , (req,res,next)=>{
-  // console.log("run")
-  next();
-})
-app.use('/add-product' , (req,res,next)=>{
-  // console.log('product details middleware');
-  res.send('<form action="/product" method="POST"><input type="text" name="product"><input type="number" name="size"><button>Add Product</button></form>')
-})
-app.use('/product',(req,res)=>{
-      console.log(req.body)
-      res.redirect('/')
 
-})
-app.use('/' ,(req,res,next)=>{
-  // console.log("this is second marvell")
-  res.send('<h1>hellow from Express</h1>')
-})
 
+app.use(adminRoutes);
+app.use(shopRoutes);
+app.use((req,res)=>{
+  res.status(404).send('<h1>Page not found</h1>')
+})
 
 app.listen(3000)
