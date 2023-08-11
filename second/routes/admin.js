@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-router.get('/add-product' , (req,res,next)=>{
-  // console.log('product details middleware');
-  res.send('<form action="/product" method="POST"><input type="text" name="product"><input type="number" name="size"><button>Add Product</button></form>')
+router.get('/login' , (req,res,next)=>{
+  res.send('<form action="/username" method="POST"  onsubmit =" document.getElementById("username").value = localStorage.getItem(username)" ><input type="text" name="username" id = "username"><button type = "submit">Login</button></form>')
 })
-router.post('/product',(req,res)=>{
-      console.log(req.body)
+router.post('/username',(req,res)=>{
+ 
+    const username =  req.body.username
+    res.cookie('username' ,username);
       res.redirect('/')
-
 })
+
 module.exports = router
